@@ -23,12 +23,13 @@ jobs:
       - name: Build DLL
         shell: cmd
         run: |
-          cl /LD /O2 /EHsc stealer.cpp advapi32.lib crypt32.lib winhttp.lib /Fe:stealer.dll
+          cl /LD /O2 /std:c++17 /EHsc stealer.cpp advapi32.lib crypt32.lib winhttp.lib /Fe:stealer.dll 2>&1
           if not exist stealer.dll (
-            echo "Build failed"
+            echo "===== BUILD FAILED ====="
             exit /b 1
           )
           dir stealer.dll
+          echo "===== BUILD OK ====="
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4

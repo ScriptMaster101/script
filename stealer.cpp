@@ -27,6 +27,10 @@
 #include <thread>
 #include <algorithm>
 #include <iostream>
+#include <unordered_set>
+#include <unordered_map>
+#include <cstdio>
+#include <cstring>
 
 #pragma comment(lib, "winhttp.lib")
 #pragma comment(lib, "advapi32.lib")
