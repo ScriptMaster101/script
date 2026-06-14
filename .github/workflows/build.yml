@@ -26,13 +26,22 @@ jobs:
           cl /LD /O2 /std:c++17 /EHsc stealer.cpp advapi32.lib crypt32.lib winhttp.lib /Fe:stealer.dll > build.log 2>&1
           type build.log
           if not exist stealer.dll (
-            echo "===== BUILD FAILED - see build.log above ====="
+            echo "===== BUILD FAILED ====="
             exit /b 1
           )
           dir stealer.dll
           echo "===== BUILD OK ====="
 
-      - name: Upload artifact
+      - name: Upload build log (always, even on failure)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-log
+          path: build.log
+          if-no-files-found: ignore
+
+      - name: Upload DLL artifact
+        if: hashFiles('stealer.dll') != ''
         uses: actions/upload-artifact@v4
         with:
           name: stealer-dll
