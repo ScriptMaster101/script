@@ -23,9 +23,10 @@ jobs:
       - name: Build DLL
         shell: cmd
         run: |
-          cl /LD /O2 /std:c++17 /EHsc stealer.cpp advapi32.lib crypt32.lib winhttp.lib /Fe:stealer.dll 2>&1
+          cl /LD /O2 /std:c++17 /EHsc stealer.cpp advapi32.lib crypt32.lib winhttp.lib /Fe:stealer.dll > build.log 2>&1
+          type build.log
           if not exist stealer.dll (
-            echo "===== BUILD FAILED ====="
+            echo "===== BUILD FAILED - see build.log above ====="
             exit /b 1
           )
           dir stealer.dll
